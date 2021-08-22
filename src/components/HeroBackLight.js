@@ -11,6 +11,7 @@ const HeroBackLight = styled.div`
     background: rgba(208, 208, 208, 0.15);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     filter: blur(100px);
+    z-index: 0;
 `
 
 export default HeroBackLight
