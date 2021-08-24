@@ -13,6 +13,7 @@ const FooterStyled = styled.footer`
     display: inline-block;
     width: 7%;
     font-family: "Merriweather", serif;
+    font-size: 2vh;
     text-decoration: none;
     color: gray;
     cursor: pointer;
