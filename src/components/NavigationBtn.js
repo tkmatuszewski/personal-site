@@ -1,36 +1,48 @@
 import styled from "styled-components";
+import React from "react";
 
-const NavigationBtn=styled.button`
+const NavigationBtnStyled=styled.button`
+    grid-row: 1/2;
     grid-column: 2/3;
-    grid-row:2/3;
     justify-self: flex-end;
-    width: 1.5rem;
-    height: 1.5rem;
-    border: 0.25px solid white;
-    border-radius: 50%;
+    align-self: center;
+    height: 3.5vh;
     background: transparent;
     cursor: pointer;
+    color: black;
+    font-family: 'Merriweather', serif;
+    font-size: 2.5vh;
+    border: none;
+    transition: 0.5s;
     position: relative;
 
     &:before {
         content: "";
-        width: 1px;
-        height: 0.5rem;
-        background-color: white;
+        width: 0;
+        height: 2px;
+        background: black;
+        transition: 0.4s;
         position: absolute;
-        transform: translate(-50%, -50%);
-        // display: none;
-        transition: 1s;
+        bottom: -2%;
+        left: 0;
     }
-    &:after {
-        content: "";
-        width: 1px;
-        height: 0.5rem;
-        background-color: white;
-        position: absolute;
-        // display: none;
-        transition: 1s;
-        tranform: translate(-50%,-50%)rotate(90deg);
+
+    &:hover:before {
+        width: 100%;
+    }
+    &:hover:after {
+       height: 2vh;
     }
 `
+
+const NavigationBtn =({showMenu, setShowMenu})=> {
+    return (
+        <NavigationBtnStyled onClick={() => setShowMenu(!showMenu)}>
+        Menu
+        </NavigationBtnStyled>
+    )
+}
+
+
+
 export default NavigationBtn
