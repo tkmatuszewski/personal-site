@@ -27,10 +27,10 @@ const FooterStyled = styled.footer`
 const Footer = ()=> {
     return (
     <FooterStyled>
-        <a>Home</a>
-        <a>About</a>
-        <a>Work</a>
-        <a>Contact</a>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
     </FooterStyled>
     )
 }
