@@ -1,29 +1,27 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useEffect, useRef} from "react";
+
 
 const LogoStyled = styled.h1`
+    grid-row: 1/2;
+    grid-column: 2/3;
     font-size : 3vh;
     font-weight : 900;
-    color : white;
     font-family: 'Raleway', sans-serif;
-    grid-column: 2/3;
-    grid-row: 2/3;
-    transition: 0.5s;
-`
-function Logo ({introState}) {
+    align-self: center;
+    transition: 0ms.5;
+    opacity: 1;
 
-  
-    const handleLogoContent =(state)=> {
-        let content = "Tomasz Matuszewski"
-        if(!state) {
-           content = "TM"
-        }
-        return content;
+    span {
+        display: block;
     }
-
+`
+const Logo =()=> {
+    
     return (
     <LogoStyled>
-        {handleLogoContent(introState)}
+       <span>Tomasz</span>
+       <span>Matuszewski</span>
     </LogoStyled>
     )
 }
