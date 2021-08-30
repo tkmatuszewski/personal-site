@@ -11,7 +11,7 @@ const HeaderStyled = styled.header`
     position: fixed;
     top:0;
     left:0;
-    transform: translateY(1vh);
+    transform: translateY(3vh);
     background: white;
     z-index: 100;
 `
@@ -19,7 +19,7 @@ const Header =({children})=> {
 
     const header =useRef();
     useEffect(() => {
-        gsap.to(header.current, { duration:"1.5", y : "-=1vh", alpha: "1", ease: 
+        gsap.to(header.current, { duration:"1.5", y : "-=3vh", alpha: "1", ease: 
         "Power3.easeOut"});
       }, []);
     return (
