@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import React from "react";
+import React, {useState, useRef, useEffect} from "react";
+import { gsap } from "gsap";
+ 
 
 const MenuPageStyled = styled.div`
     width: 100%;
@@ -8,14 +10,16 @@ const MenuPageStyled = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    transform: ${props => props.showMenu ?  'translateX(0)' : 'translateX(-100%)'};
+    transform: ${props => props.showMenu ?  'translateY(0)' : 'translateY(-100vh)'};
     display: flex;
     justify-content: center;
     align-items: center;
     transition: 0.5s;
+    z-index: 100;
+    overflow: hidden;
 `
 
-const MenuClosePageStyled = styled.button`
+const MenuCloseStyled = styled.button`
     grid-row: 1/2;
     grid-column: 2/3;
     justify-self: right;
@@ -81,29 +85,65 @@ const MenuMainStyled = styled.nav`
         position: absolute;
         bottom: -0.25rem;
         left: 0;
-
     }
 
     a:hover:before {
-        width: 150%;
+        width: 120%;
     }
+
+    .menuSide {
+        font-size: 2vh;
+        font-family: 'Raleway', sans-serif;
+    }
+
+`
+
+const MenuItemStyled = styled.div`
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Raleway', sans-serif;
 `
 
 const Menu =({showMenu, setShowMenu})=> {
 
+    const menuList = useRef();
+    const menuItems = gsap.utils.selector();
+    const [menuOption, setMenuOption]= useState(null);
 
+    const handleMenuOption = (option) => {
+        return setMenuOption(option)
+    }
+    useEffect(() => {
+       gsap.to(menuItems.current, { duration:"1.5", delay: "1", alpha: "1", ease: 
+       "Power1.easeOut"});
+     }, []);
 
+    const handleClick = () => {
+        setShowMenu(!showMenu)
+    }
 
     return (
         <MenuPageStyled showMenu={showMenu}>
             <MenuPageCntStyled>
-                <MenuClosePageStyled onClick = {()=> setShowMenu(false)}/>
+                <MenuCloseStyled onClick = {()=> setShowMenu(false)}/>
                 <MenuCntStyled>
-                    <MenuMainStyled>
-                        <a href="">Home</a>
-                        <a href="">About</a>
-                        <a href="">Work</a>
-                        <a href="">Contact</a>
+                    <MenuMainStyled ref={menuList}>
+                        <a href="#home" 
+                        onMouseEnter={()=> setShowMenu("home")}
+                        onMouseLeave = {()=>handleMenuOption(null)}
+                        onClick={()=>handleClick()}>Home</a>
+                        <a href="#about" 
+                        onMouseEnter={()=> handleMenuOption("about")}
+                        onMouseLeave = {()=>handleMenuOption(null)}
+                        onClick={()=>handleClick()}>About</a>
+                        <a href="#work" 
+                        onMouseEnter={()=> handleMenuOption("work")}
+                        onMouseLeave = {()=>handleMenuOption(null)}
+                        onClick={()=>handleClick()}>Work</a>
+                        <a href="#contact" 
+                        onMouseEnter={()=> handleMenuOption("contact")}
+                        onMouseLeave = {()=>handleMenuOption(null)}
+                        onClick={()=>handleClick()}>Contact</a>
                     </MenuMainStyled>
                 </MenuCntStyled>
             </MenuPageCntStyled>
