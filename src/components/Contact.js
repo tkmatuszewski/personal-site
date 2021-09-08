@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import React from "react";
+import React, {useRef, useEffect} from "react";
+import gsap from "gsap";
 
 const ContactStyled = styled.section`
     width: 100%;
@@ -35,6 +36,7 @@ const StrongRow = styled.span`
   display: flex;
   font-size: 8vh;
   align-items: center;
+  opacity: 0;
 
   a {
     color: black;
@@ -72,6 +74,7 @@ const ContactDataContaier = styled.div`
   align-items: center;
   font-family: "Raleway", sans-serif;
   margin-top: 5%;
+  opacity: 0;
 `;
 
 const ContactDataColumn = styled.div`
@@ -103,15 +106,47 @@ const ContactDataRow = styled.span`
 `;
 
 const Contact = () => {
+
+  const sline1 = useRef()
+  const sline2 = useRef()
+  const data = useRef()
+
+  useEffect(() => {
+
+    const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#contact",
+          end: "center center",
+          start: "top bottom",
+          scrub: true,
+        }
+      });
+    gsap.to(sline1.current, {scrollTrigger: {
+      trigger: "#contact",
+      end: "center center",
+      start: "top bottom",
+      scrub: true,
+    }, duration:"1.5", x:"-=3vw", alpha: "1", ease: "circ.easeOut"});
+    tl.to(sline2.current, { duration: "1.5" , x :"+=3vw", alpha: "1", ease: "circ.easeOut", delay : "0.7"})
+    tl.to(data.current, { scrollTrigger: {
+          trigger: "#contact",
+          start: "center-=50 center",
+          end: "bottom bottom",
+          y:30,
+          scrub: true,
+        },
+        duration: "2" , alpha: "1", ease: "circ.easeOut", delay : "0.7"})
+  }, []);
+  
     return (
         <ContactStyled id="contact">
             <ContactContainerStyled>
                 <ContactStrongStyled>
-                    <StrongRow>Do you want to talk?</StrongRow>
-                    <StrongRow><div/>Get in <a href="mailto:tkmatuszewski@gmail.com">touch</a></StrongRow>
+                    <StrongRow ref={sline1}>Do you want to talk?</StrongRow>
+                    <StrongRow ref={sline2}><div/>Get in <a href="mailto:tkmatuszewski@gmail.com">touch</a></StrongRow>
                 </ContactStrongStyled>
-                <ContactDataContaier>
-                <ContactDataColumn>
+                <ContactDataContaier ref={data}>
+                  <ContactDataColumn>
                     <ContactDataRow>Tomasz Matuszewski</ContactDataRow>
                     <ContactDataRow>Frontend Developer</ContactDataRow>
                     </ContactDataColumn>
