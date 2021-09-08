@@ -1,13 +1,15 @@
 import styled from "styled-components";
-import React, {useState, useRef, useEffect} from "react";
+import React, {useRef, useEffect} from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
  
 
 const MenuPageStyled = styled.div`
     width: 100%;
     height: 100vh;
-    background-color: white;
-    position: absolute;
+    background-color: rgba(0,0,0,0.9);
+    position: fixed;
     top: 0;
     left: 0;
     transform: ${props => props.showMenu ?  'translateY(0)' : 'translateY(-100vh)'};
@@ -15,8 +17,10 @@ const MenuPageStyled = styled.div`
     justify-content: center;
     align-items: center;
     transition: 0.5s;
-    z-index: 100;
-    overflow: hidden;
+    z-index: 1000;
+    @media (max-width: 1000px) {
+        height: 100vh;
+    }
 `
 
 const MenuCloseStyled = styled.button`
@@ -35,7 +39,7 @@ const MenuCloseStyled = styled.button`
   content: "";
   width: 100%;
   height: 2px;
-  background: black;
+  background: white;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -74,13 +78,19 @@ const MenuMainStyled = styled.nav`
         color: black;
         cursor: pointer;
         position: relative;
+        /* opacity: 0; */
+        transform: translateX(+5vw);
+        color: white;
+        @media (max-width: 1000px) {
+            font-size: 8vh;
+      }
     }
 
     a:before {
         content: "";
         width: 0;
         height: 3px;
-        background: black;
+        background: white;
         transition: 0.4s;
         position: absolute;
         bottom: -0.25rem;
@@ -95,28 +105,16 @@ const MenuMainStyled = styled.nav`
         font-size: 2vh;
         font-family: 'Raleway', sans-serif;
     }
-
 `
-
-const MenuItemStyled = styled.div`
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Raleway', sans-serif;
-`
-
 const Menu =({showMenu, setShowMenu})=> {
 
     const menuList = useRef();
-    const menuItems = gsap.utils.selector();
-    const [menuOption, setMenuOption]= useState(null);
-
-    const handleMenuOption = (option) => {
-        return setMenuOption(option)
-    }
-    useEffect(() => {
-       gsap.to(menuItems.current, { duration:"1.5", delay: "1", alpha: "1", ease: 
-       "Power1.easeOut"});
-     }, []);
+    const menuItems = gsap.utils.selector(menuList);
+    
+    // useEffect(() => {
+    //    gsap.to(menuItems("menuItem"), { duration:"1.5", x: "-=5vw", alpha: "1", ease: 
+    //    "Power3.easeOut"});
+    //  }, []);
 
     const handleClick = () => {
         setShowMenu(!showMenu)
@@ -128,22 +126,10 @@ const Menu =({showMenu, setShowMenu})=> {
                 <MenuCloseStyled onClick = {()=> setShowMenu(false)}/>
                 <MenuCntStyled>
                     <MenuMainStyled ref={menuList}>
-                        <a href="#home" 
-                        onMouseEnter={()=> setShowMenu("home")}
-                        onMouseLeave = {()=>handleMenuOption(null)}
-                        onClick={()=>handleClick()}>Home</a>
-                        <a href="#about" 
-                        onMouseEnter={()=> handleMenuOption("about")}
-                        onMouseLeave = {()=>handleMenuOption(null)}
-                        onClick={()=>handleClick()}>About</a>
-                        <a href="#work" 
-                        onMouseEnter={()=> handleMenuOption("work")}
-                        onMouseLeave = {()=>handleMenuOption(null)}
-                        onClick={()=>handleClick()}>Work</a>
-                        <a href="#contact" 
-                        onMouseEnter={()=> handleMenuOption("contact")}
-                        onMouseLeave = {()=>handleMenuOption(null)}
-                        onClick={()=>handleClick()}>Contact</a>
+                        <a className="menuItem" href="#home" onClick={()=>handleClick()}>Home</a>
+                        <a className="menuItem" href="#about" onClick={()=>handleClick()} >About</a>
+                        <a className="menuItem" href="#work" onClick={()=>handleClick()}>Work</a>
+                        <a className="menuItem" href="#contact" onClick={()=>handleClick()}>Contact</a>
                     </MenuMainStyled>
                 </MenuCntStyled>
             </MenuPageCntStyled>
