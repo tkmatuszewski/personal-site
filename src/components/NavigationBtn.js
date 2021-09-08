@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import React, {useRef} from "react";
 
 const NavigationBtnStyled=styled.button`
     grid-row: 1/2;
@@ -9,12 +9,13 @@ const NavigationBtnStyled=styled.button`
     height: 3.5vh;
     background: transparent;
     cursor: pointer;
-    color: black;
-    font-family: 'Merriweather', serif;
+    font-family: 'Raleway', sans-serif;
     font-size: 2.5vh;
     border: none;
-    transition: 0.5s;
+    transform: translateX(-50%);
     position: relative;
+    color: inherit;
+    z-index: 1;
 
     &:before {
         content: "";
@@ -36,8 +37,11 @@ const NavigationBtnStyled=styled.button`
 `
 
 const NavigationBtn =({showMenu, setShowMenu})=> {
+    
+    const menuBtn= useRef()
+
     return (
-        <NavigationBtnStyled onClick={() => setShowMenu(!showMenu)}>
+        <NavigationBtnStyled ref={menuBtn} onClick={() => setShowMenu(!showMenu)}>
         Menu
         </NavigationBtnStyled>
     )
