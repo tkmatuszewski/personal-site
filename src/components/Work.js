@@ -13,7 +13,7 @@ const WorkStyled = styled.section`
     }
 
     li {
-        width: 60%;
+        width: 80%;
         max-height: 34vh;
         display: flex;
         align-items: center;
@@ -32,7 +32,7 @@ const WorkStyled = styled.section`
         width: 70%;
     }
     li:nth-of-type(3) {
-        width: 80%;
+        width: 60%;
         border-bottom: 3px solid black;
     }
 
@@ -79,7 +79,6 @@ const WorkSign = styled.h2`
         font-size: 20vh;
         font-family: 'Raleway',sans-serif;
         font-weight: 700;
-        /* color: #1b1b1b; */
         color: lightgray;
         position: absolute;
         top:20%;
