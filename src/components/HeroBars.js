@@ -2,36 +2,36 @@ import styled from "styled-components";
 import React, { useEffect, useRef} from "react";
 import { gsap } from "gsap/all";
 
-const HeroBarsStyled = styled.div`
-        grid-row: 1/3;
-        grid-column: 1/4;
-        align-self: bottom;
-        justify-self: right;
-        width: 100%;
-        background: white;
-        display: flex;
-        justify-content: flex-end;
-        overflow: hidden;
+const HeroBarsCnt = styled.div`
+min-height: 60vh;
+display: flex;
+
+/* @media (max-width: 600px) {
+min-he } */
 `
 
-const BarCnt = styled.div`
-    background: black;
-    height: auto;
-    padding: 0 3%;
-    margin: 0.5%;
-    opacity: 1;
-    z-index: 1;
+const HeroBarsStyled = styled.ul`
+
+        align-self: flex-end;
+        width: 30%;
+        margin-left: 10vw;
+        list-style-type: none;
+        z-index: 2;
+        transform: translateY(-2vh);
+`
+
+const BarCnt = styled.li`
+    width: 100%;
+    color: black;
+    opacity: 0;
+    translate: transformX(15vw);
 `
 
 const HeroStrong = styled.strong`
     display: block;
     font-family: 'Raleway', sans-serif;
     font-weight: 700;
-    font-size: 5vh;
-    align-self: center;
-    color: white;
-    margin: 0 auto;
-    margin-top: 30vh;
+    font-size: 8vh;
 `
 
 const HeroBars = () => {
@@ -40,42 +40,43 @@ const HeroBars = () => {
     const bar2 = useRef();
     const bar3 = useRef();
     const bar4 = useRef();
-    const bar5 = useRef();
 
-    const generateRandom = ()=> {
-        const number= Math.floor(Math.random() * 11);
-        return String(-number+"vh")
-    }
+    const el = useRef();
+    const q = gsap.utils.selector(el);
 
     useEffect(() => {
-        gsap.to(bar1.current, {duration: "1", y: generateRandom(), ease:"Power3.easeOut", delay: "1"})
-        gsap.to(bar2.current, {duration: "1", y: generateRandom(), ease:"Power3.easeOut", delay: "1"})
-        gsap.to(bar4.current, {duration: "1", y: generateRandom(), ease:"Power3.easeOut", delay: "1"})
-        gsap.to(bar5.current, {duration: "1", y: generateRandom(), ease:"Power3.easeOut", delay: "1"})
-        gsap.to(bar3.current, {duration: "1", y: "+=15vh", ease:"Power3.easeOut", delay: "1"});
+        gsap.to(q(".line"), { duration: "2", alpha: "1", x: "-=5vw", ease:"Power3.easeOut", delay :"0.5"})
+        gsap.to(el.current,{scrollTrigger: {
+            trigger: "#home",
+            start: "top top",
+            end: "center top",
+            scrub: true,
+          }, y : "+=25vh", duration: "1",
+          alpha: "1",
+          ease: "circ.easeOut"});
+        gsap.to(bar4.current, {scrollTrigger: {trigger: "#about",
+        start: "top bottom",
+        end: "top 50vh",
+        scrub: true},duration: "1", color: "white", ease:"Power3.easeOut"});
      }, []);
 
     return (
-        <HeroBarsStyled>
-            <BarCnt>
-                <HeroStrong ref={bar1}>I</HeroStrong>
-            </BarCnt>
-            <BarCnt>
-                 <HeroStrong ref={bar2}>am</HeroStrong>
-            </BarCnt>
-            <BarCnt>
-                <HeroStrong ref={bar3}>diffrent</HeroStrong>
-            </BarCnt>
-            <BarCnt>
-                <HeroStrong ref={bar4}>type</HeroStrong>
-            </BarCnt>
-            <BarCnt>
-                <HeroStrong ref={bar4}>of</HeroStrong>
-            </BarCnt>
-            <BarCnt>
-                <HeroStrong ref={bar5}>dev.</HeroStrong>
-            </BarCnt>
-        </HeroBarsStyled>
+        <HeroBarsCnt>
+  `      <HeroBarsStyled ref={el}>
+                <BarCnt ref={bar1} className="line">
+                    <HeroStrong >Concept</HeroStrong>
+                </BarCnt>
+                <BarCnt ref={bar2} className="line">
+                    <HeroStrong>Design</HeroStrong>
+                </BarCnt>
+                <BarCnt ref={bar3} className="line">
+                    <HeroStrong>Code</HeroStrong>
+                </BarCnt>
+                <BarCnt ref={bar4} className="line">
+                    <HeroStrong>Repeat.</HeroStrong>
+                </BarCnt>
+            </HeroBarsStyled>`
+        </HeroBarsCnt>
     )
 }
 
