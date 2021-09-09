@@ -1,8 +1,5 @@
 import styled from "styled-components";
-import React, {useRef, useEffect} from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
+import React from "react";
  
 
 const MenuPageStyled = styled.div`
@@ -78,7 +75,7 @@ const MenuMainStyled = styled.nav`
         color: black;
         cursor: pointer;
         position: relative;
-        /* opacity: 0; */
+
         transform: translateX(+5vw);
         color: white;
         @media (max-width: 1000px) {
@@ -108,14 +105,6 @@ const MenuMainStyled = styled.nav`
 `
 const Menu =({showMenu, setShowMenu})=> {
 
-    const menuList = useRef();
-    const menuItems = gsap.utils.selector(menuList);
-    
-    // useEffect(() => {
-    //    gsap.to(menuItems("menuItem"), { duration:"1.5", x: "-=5vw", alpha: "1", ease: 
-    //    "Power3.easeOut"});
-    //  }, []);
-
     const handleClick = () => {
         setShowMenu(!showMenu)
     }
@@ -125,7 +114,7 @@ const Menu =({showMenu, setShowMenu})=> {
             <MenuPageCntStyled>
                 <MenuCloseStyled onClick = {()=> setShowMenu(false)}/>
                 <MenuCntStyled>
-                    <MenuMainStyled ref={menuList}>
+                    <MenuMainStyled>
                         <a className="menuItem" href="#home" onClick={()=>handleClick()}>Home</a>
                         <a className="menuItem" href="#about" onClick={()=>handleClick()} >About</a>
                         <a className="menuItem" href="#work" onClick={()=>handleClick()}>Work</a>

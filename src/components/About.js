@@ -14,13 +14,14 @@ width: 50%;
 display: grid;
 grid-template-columns: 50% 50%;
 grid-template-rows: repeat(4, 40vh );
-grid-row-gap: 7vh;
+grid-row-gap: 5vh;
 color: white;
+transform: translateX(5vw);
+margin-top: 5vh;
 @media (max-width: 1000px) {
   width: 80%;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 40vh);
-  grid-row-gap: 0;
+  grid-template-rows: 35vh repeat(3, 25vh);
 }
 `
 const AboutStrongCnt = styled.div`
@@ -28,14 +29,7 @@ grid-column: 1/3;
 grid-row: 1/2;
 margin-top: 15vh;
 margin-bottom: 15vh;
-z-index: 10;
 opacity: 0;
-@media (max-width: 1000px) {
-  width: 75%;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 40vh);
-  grid-row-gap: 0;
-}
 
 `
 const StrongRow = styled.strong`
@@ -94,7 +88,7 @@ const About = () => {
       useEffect(() => {
 
         gsap.to(AboutHeader.current,{scrollTrigger: {
-          trigger: ".About__AboutStrongCnt-eZoALK",
+          trigger: ".aboutHeader",
           start: "center bottom",
           end: "center center",
           scrub: true,
@@ -134,7 +128,7 @@ const About = () => {
         <div id="about">
             <AboutStyled>
                 <AboutCnt>
-                    <AboutStrongCnt ref={AboutHeader} id ="aboutHeader">
+                    <AboutStrongCnt ref={AboutHeader} className ="aboutHeader">
                         <StrongRow>I'm Tomasz,</StrongRow>
                         <StrongRow>a creative developer</StrongRow>
                         <StrongRow>based in Warsaw.</StrongRow>

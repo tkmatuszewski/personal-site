@@ -2,111 +2,121 @@ import styled from "styled-components";
 import React from "react";
 
 const WorkStyled = styled.section`
-    min-height: 100vh;
-    overflow: hidden;
-    position: relative;
     
     ul {
+        justify-self: flex-end;
         list-style-type: none;
-        min-height: 100%;
-        transform: translateX(-15%);
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+        }
     }
 
     li {
-        width: 80%;
-        max-height: 34vh;
-        display: flex;
-        align-items: center;
-        font-size: 8vh;
-        font-weight: lighter;
-        font-family: 'Raleway', sans-serif;
-        transform: skew(-40deg);
-        background: black;
-        border-bottom: 1px solid darkgrey;
-        transition: 0.4s;
-        overflow: hidden;
-        position:relative;
-        display: flex;
-    }
-    li:nth-of-type(2) {
-        width: 70%;
-    }
-    li:nth-of-type(3) {
-        width: 60%;
-        border-bottom: 3px solid black;
-    }
-
-
-    a {
-        display: block;
-        width: 50%;
-        color: white;
-        text-decoration: none;
-        margin-left: 20vw;
-        line-height: 33vh;
-        /* transform: skew(40deg); */
-        }
-`
-const HoverStyled = styled.div`
         width: 100%;
-        height: 100%;
-        background: black;
-        background-position: 30%;
-        /* background-position: 90%; */
-        transform: skew(40deg);
-        cursor: pointer;
-        transition: 0.3;
-
-        &:hover {
-        height: 100%;
-        background: url(${props => props.bg}) no-repeat;
-        background-size: cover;
-        background-position: 30%;
+        min-height: 20vh;
+        font-family: 'Raleway', sans-serif;
+        transition: 0.4s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid lightgray;
+        @media (max-width: 425px) {
+            min-height: 15vh;
         }
 
-        &:after {
-            content: "";
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background: linear-gradient(29deg, rgba(2,0,36,1) 0%, rgba(26,26,29,0.7777485994397759) 39%, rgba(0,0,0,1) 100%);
+        &:first-of-type {
+            border-top: 1px solid lightgray;
         }
+
+        span {
+            color: gray;
+            display: block;
+            width: 15%;
+        }
+    }
+    `
+
+    const WorkCnt = styled.div`
+        width: 80%;
+        margin: 0 auto;
+    `
+
+    const Container = styled.div`    
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
     `
     
-const WorkSign = styled.h2`
-        font-size: 20vh;
-        font-family: 'Raleway',sans-serif;
-        font-weight: 700;
-        color: lightgray;
-        position: absolute;
-        top:20%;
-        right: 10%;
+const ProjectTitle = styled.h3`
+    width: 33%;
+    font: 'Raleway, sans-serif'; 
+    font-weight: bold;
+    font-size : 4vh;
+    text-decoration: none;
+    color: darken(darkgrey, 10);
+    @media (max-width: 768px) {
+            font-size: 3vh;
+        }
 `
+
+const WorkSign = styled.h2`
+    margin-top: 15vh;
+    font-size: 20vh;
+    font-family: 'Raleway',sans-serif;
+    font-weight: 700;
+    opacity: 0.3;
+    @media (max-width: 425px) {
+        margin-top: 5vh;
+        font-size: 10vh;
+    }
+    `
+    
 
 
 const Work = ()=> {
     return (
         <WorkStyled id="work">
-            <WorkSign>Work</WorkSign>
+            <WorkCnt>
+            <WorkSign>Work.</WorkSign>
             <ul>
-                <li>
-                    <HoverStyled bg={"https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&q=80"}>
-                        <a href="">Babylab db</a>
-                    </HoverStyled>
-                </li>  
-                <li>
-                    <HoverStyled bg={"https://images.unsplash.com/photo-1591159221879-be4e0e5026a0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"}>
-                       <a href="">Surf school </a>
-                    </HoverStyled>
-                </li>
-                <li>
-                    <HoverStyled bg={"https://images.unsplash.com/photo-1564419320603-628d868a193f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=643&q=80"}>
-                        <a href="">One more</a>
-                    </HoverStyled>
-                </li>
+                <a href="">
+                    <li>
+                        <Container>
+                            <ProjectTitle>
+                                Babylab database
+                            </ProjectTitle>
+                            <span>Desktop app</span>
+                        </Container>
+                    </li>
+                </a>
+                <a href="">
+                    <li>
+                        <Container>
+                            <ProjectTitle>
+                                Surf School
+                            </ProjectTitle>
+                            <span>Website</span>
+                        </Container>
+                    </li>
+                </a>
+                <a href="">
+                    <li>
+                        <Container>
+                            <ProjectTitle>
+                                Comming soon
+                            </ProjectTitle>
+                            <span>In progress</span>
+                        </Container>
+                    </li>
+                </a>
             </ul>
+            </WorkCnt>
         </WorkStyled>
     )
 }

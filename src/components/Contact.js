@@ -4,13 +4,13 @@ import gsap from "gsap";
 
 const ContactStyled = styled.section`
     width: 100%;
-    height: 100vh;
+    min-height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
 `
 const ContactContainerStyled = styled.div`
-  width: 75%;
+  width: 70%;
   height: 80vh;
   display: grid;
   grid-template-rows: 1fr 1fr;
@@ -18,11 +18,14 @@ const ContactContainerStyled = styled.div`
 `;
 
 const ContactStrongStyled = styled.div`
-  grid-column: 1/2;
+  grid-column: 1/3;
   font-family: 'Raleway', sans-serif;
   font-weight: 500;
   align-self: end;
   color: 383838;
+  @media (max-width: 1024px) {
+    grid-column: 1/3;
+  }
   
   div {
   width: 20%;
@@ -37,7 +40,16 @@ const StrongRow = styled.span`
   font-size: 8vh;
   align-items: center;
   opacity: 0;
+  @media (max-width: 1024px) {
+    font-size: 6vh;
+  }
+  @media (max-width: 583px) {
+    font-size: 3.5vh;
+  }
 
+  &:first-of-type{
+    transform: translateX(3vw);
+  }
   a {
     color: black;
     text-decoration: none;
@@ -72,20 +84,43 @@ const ContactDataContaier = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   font-family: "Raleway", sans-serif;
   margin-top: 5%;
   opacity: 0;
+  }
 `;
 
 const ContactDataColumn = styled.div`
-  width: 35%;
+  width: 33%;
   height: 100%;
-  padding: 1% 8%;
+  @media (max-width: 1196px) {
+    width: 100%;
+    margin-top: 10%;
+    text-align: center;
+  }
 
   &:nth-of-type(2) {
     border: 1px solid darkgray;
     border-top: none;
     border-bottom: none;
+      @media (max-width: 1196px) { 
+      border: none;
+    }
+  }
+  
+  div {
+    width: 50%;
+    margin: 0 auto;
+    @media (max-width: 500px) { 
+      width: 100%;
+    }
+
+    a {
+      font-style: normal;
+      text-decoration: none;
+      color: black;
+    }
   }
 `;
 
@@ -93,12 +128,6 @@ const ContactDataRow = styled.span`
   display: block;
   line-height: 1.5;
   letter-spacing: 0.1em;
-
-  a {
-    font-style: normal;
-    text-decoration: none;
-    color: black;
-  }
 
   address span {
     font-style: normal;
@@ -147,18 +176,24 @@ const Contact = () => {
                 </ContactStrongStyled>
                 <ContactDataContaier ref={data}>
                   <ContactDataColumn>
-                    <ContactDataRow>Tomasz Matuszewski</ContactDataRow>
-                    <ContactDataRow>Frontend Developer</ContactDataRow>
+                      <div>
+                        <ContactDataRow>Tomasz Matuszewski</ContactDataRow>
+                        <ContactDataRow>Frontend Developer</ContactDataRow>
+                      </div>
                     </ContactDataColumn>
                     <ContactDataColumn>
-                    <address>
-                        <ContactDataRow>tkmatuszewski@gmail.com</ContactDataRow>
-                        <ContactDataRow>Warsaw, Poland</ContactDataRow>
-                    </address>
+                      <div>
+                        <address>
+                            <ContactDataRow>tkmatuszewski@gmail.com</ContactDataRow>
+                            <ContactDataRow>Warsaw, Poland</ContactDataRow>
+                        </address>
+                    </div>
                     </ContactDataColumn>
                     <ContactDataColumn>
-                    <ContactDataRow><a href="https://linkedin.com/in/matuszewski-tomasz" target="blank">Linkedin</a></ContactDataRow>
-                    <ContactDataRow><a href="https://github.com/tkmatuszewski" target="blank">Github</a></ContactDataRow>
+                      <div>
+                        <ContactDataRow><a href="https://linkedin.com/in/matuszewski-tomasz" target="blank">Linkedin</a></ContactDataRow>
+                        <ContactDataRow><a href="https://github.com/tkmatuszewski" target="blank">Github</a></ContactDataRow>
+                      </div>
                     </ContactDataColumn>
                 </ContactDataContaier>
             </ContactContainerStyled>

@@ -11,7 +11,7 @@ const FooterStyled = styled.footer`
 
   a {
     display: inline-block;
-    width: 7%;
+    width: 12%;
     font-family: "Merriweather", serif;
     font-size: 2vh;
     text-decoration: none;

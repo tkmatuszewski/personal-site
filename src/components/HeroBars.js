@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import React, { useEffect, useRef} from "react";
 import { gsap } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const HeroBarsCnt = styled.div`
 min-height: 60vh;
 display: flex;
-
-/* @media (max-width: 600px) {
-min-he } */
 `
 
 const HeroBarsStyled = styled.ul`
@@ -47,18 +46,17 @@ const HeroBars = () => {
     useEffect(() => {
         gsap.to(q(".line"), { duration: "2", alpha: "1", x: "-=5vw", ease:"Power3.easeOut", delay :"0.5"})
         gsap.to(el.current,{scrollTrigger: {
-            trigger: "#home",
-            start: "top top",
-            end: "center top",
+            trigger: ".heroImg",
+            start: "top-=100 center",
+            end: "bottom top",
             scrub: true,
-          }, y : "+=25vh", duration: "1",
-          alpha: "1",
-          ease: "circ.easeOut"});
-        gsap.to(bar4.current, {scrollTrigger: {trigger: "#about",
-        start: "top bottom",
-        end: "top 50vh",
-        scrub: true},duration: "1", color: "white", ease:"Power3.easeOut"});
-     }, []);
+          }, y : "+=25vh", duration: "3", alpha: "1", ease: "circ.easeOut"});
+        gsap.to(bar4.current, {scrollTrigger: {
+            trigger: ".heroImg",
+            start:"top-=100 center",
+            end: "bottom top",
+            scrub: true},duration: "1", color: "white", ease:"Power3.easeOut"});
+     }, [q]);
 
     return (
         <HeroBarsCnt>
