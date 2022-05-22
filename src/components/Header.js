@@ -1,63 +1,60 @@
 import styled from "styled-components";
 import React, { useEffect, useRef} from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 
 const HeaderStyled = styled.header`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
     position: fixed;
-    top:0;
-    left:0;
-    transform: translateY(3vh);
-    color: black;
-    background: white;
-    border-bottom: 0.25px solid lightgray;
-    z-index: 100;
-`
+    top: 2.5vh;
+    left: 4vw;
 
-const HeaderCnt = styled.div`
-  width: 90%;
-  height : 10vh;
-  display: flex;
-  justify-content:space-between;
-  align-items: center;
-`
+    width: 92vw;
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    opacity: 0 ;
+`;
 
 const Header =({children})=> {
 
-    const header =useRef();
+  gsap.registerPlugin(ScrollTrigger);
+  const header = useRef();
+  const tl = useRef();
 
 
-    useEffect(() => {
-
-        const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: "#about",
-              start: "top top",
-              end: "center center",
-              scrub: true,
-            }
-          });
-        gsap.to(header.current, { duration:"1.5", y : "-=3vh", alpha: "1", ease: 
-        "Power3.easeOut"});
-        tl.to(header.current, { duration: "0.2" , ease: "circ.easeOut", backgroundColor: "transparent", border: "none", color: "white"})
-        gsap.to(header.current, { scrollTrigger: {
+  useEffect(() => {
+    tl.current = gsap
+      .timeline()
+      .to(header.current, {
+        alpha: "1",
+        ease: "Power3.easeOut",
+      })
+      .to(header.current, {
+        scrollTrigger: {
           trigger: "#about",
-          start: "center center",
-          end: "top bottom",
-          scrub: true,
-        }, duration: "1.5" , ease: "circ.easeOut", backgroundColor: "black"})
-      },
-     []);
+          start: "top top"
+        },
+        color: "white"
+      })
+      .to(header.current, {
+        scrollTrigger: {
+          trigger: "#about",
+          start: "bottom top"
+        },
+        color: "white"
+      })
+      .to(header.current, {
+        scrollTrigger: {
+          trigger: "#about",
+          start: "bottom top"
+        },
+        color: "black"
+      });
+  })
     return (
-        <HeaderStyled ref={header}>
-          <HeaderCnt>
-            {children}
-          </HeaderCnt>
-        </HeaderStyled>
+      <HeaderStyled ref={header}>
+        {children}
+      </HeaderStyled>
     )
 }
 
