@@ -6,6 +6,10 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
-  }`
+  }
 
+  section {
+    overflow-x: hidden ;
+  }
+  `
   export default GlobalStyle
