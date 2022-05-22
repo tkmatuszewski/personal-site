@@ -1,17 +1,16 @@
 import React, {useState} from "react";
 import GlobalFonts from '../fonts/fonts';
 import GlobalStyle from "../components/GlobalStyle"
-import HeroPage from "../components/HeroPage"
+import Hero from "../components/Hero";
 import Logo from "../components/Logo"
-import HeroBars from "../components/HeroBars";
 import Footer from "../components/Footer";
 import Contact from "../components/Contact";
 import About from "../components/About"
 import Work from "../components/Work";
 import Header from "../components/Header";
-import HeroImg from "../components/HeroImg";
 import NavigationBtn from "../components/NavigationBtn";
 import Menu from "../components/Menu";
+import Skills from "../components/Skills";
 
 const IndexPage = () => {
 
@@ -27,11 +26,9 @@ const IndexPage = () => {
             <NavigationBtn showMenu = {showMenu} setShowMenu = {()=>setShowMenu(!showMenu)}/>
         </Header>
         <main>
-          <HeroPage>
-            <HeroBars/>
-            <HeroImg/>
-          </HeroPage>
-          <About/>
+          <Hero/>
+          <About />
+          <Skills/>
           <Work/>
           <Contact/>
         </main>
