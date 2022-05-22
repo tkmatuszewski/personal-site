@@ -3,27 +3,35 @@ import React from "react";
 
 
 
-const LogoStyled = styled.h1`
-    grid-row: 1/2;
-    grid-column: 2/3;
-    font-size : 2vh;
-    font-weight : 900;
-    font-family: 'Raleway', sans-serif;
-    align-self: center;
-    opacity: 1;
+const LogoStyled = styled.div`
+  font-size: 2vh;
+  font-weight: 900;
+  font-family: "Montserrrat", sans-serif;
+  align-self: center;
+  color: inherit;
+  opacity: 1;
+  line-height:1 ;
 
-    span {
-        display: block;
-    }
-`
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  span {
+    display: block;
+  }
+`;
+
 const Logo = () => {
     
     return (
-    <LogoStyled>
-       <span>Tomasz</span>
-       <span>Matuszewski</span>
-    </LogoStyled>
-    )
+      <LogoStyled>
+        <a href="#home">
+          <span>TK</span>
+          <span>MAT</span>
+        </a>
+      </LogoStyled>
+    );
 }
 
 export default Logo;
