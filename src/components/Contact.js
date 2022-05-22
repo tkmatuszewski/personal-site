@@ -1,99 +1,86 @@
 import styled from "styled-components";
 import React, {useRef, useEffect} from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 
 const ContactStyled = styled.section`
     width: 100%;
-    min-height: 90vh;
+    min-height: 120vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(45deg, orange, violet) ;
+
+    .container {
+      width: 85%;
+    }
 `
-const ContactContainerStyled = styled.div`
-  width: 70%;
-  height: 80vh;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 60% 40%;
-`;
-
 const ContactStrongStyled = styled.div`
-  grid-column: 1/3;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 500;
-  align-self: end;
-  color: 383838;
-  @media (max-width: 1024px) {
-    grid-column: 1/3;
-  }
-  
+  font-family: "Raleway", sans-serif;
+
   div {
-  width: 20%;
-  height: 2px;
-  background: darkgray;
-  margin: 0 4% 0 1%;
-  }
-`;
-
-const StrongRow = styled.span`
-  display: flex;
-  font-size: 8vh;
-  align-items: center;
-  opacity: 0;
-  @media (max-width: 1024px) {
-    font-size: 6vh;
-  }
-  @media (max-width: 583px) {
-    font-size: 3.5vh;
+    width: 20%;
+    height: 2px;
+    background: white;
+    margin-right: 2%;
   }
 
-  &:first-of-type{
-    transform: translateX(3vw);
-  }
-  a {
-    color: black;
-    text-decoration: none;
-    font-weight: 700;
-    margin-left: 0.75rem;
-    position: relative;
-    z-index: 100;
-  }
-  a:after {
-      content:"";
-      width: 0;
-      height: 0;
-      background: gray;
-      opacity: 0.3;
-      position: absolute;
-      bottom: 0%;
-      left: 0%;
-      z-index: 0;
-      transition: 0.2s;
-  }
-  a:hover:after {
-      height: 100%;
-      width: 100%;
-      padding: 0 5%;
+  .row {
+    display: flex;
+    font-size: 9vw;
+    align-items: center;
+    opacity: 0;
+    color: white;
+
+    &:first-of-type {
+      transform: translateX(-50vw);
+    }
+    &:last-of-type {
+      transform: translateX(50vw);
+    }
+
+    a {
+      color: #f1e924;
+      text-decoration: none;
+      font-weight: lighter;
+    }
+
+    button {
+      position: relative;
+      overflow: hidden;
+      height: 9vw;
+      line-height: 9vw;
+      border: none;
+      background: none;
+    }
+
+    span {
+      display: block;
+      font-size: 9vw;
+      color: white;
+      text-align: start;
+    }
   }
 `;
 
 const ContactDataContaier = styled.div`
-  grid-row: 2/3;
-  grid-column: 1/3;
-  align-self: center;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   font-family: "Raleway", sans-serif;
-  margin-top: 5%;
   opacity: 0;
-  }
-`;
+  margin-top: 20vh;
+`
 
 const ContactDataColumn = styled.div`
   width: 33%;
   height: 100%;
+  color: white;
+  font-weight: 500;
+  font-size: 1.2rem ;
+  text-align: center ;
+
   @media (max-width: 1196px) {
     width: 100%;
     margin-top: 10%;
@@ -101,27 +88,19 @@ const ContactDataColumn = styled.div`
   }
 
   &:nth-of-type(2) {
-    border: 1px solid darkgray;
+    border: 1px solid white;
     border-top: none;
     border-bottom: none;
       @media (max-width: 1196px) { 
       border: none;
     }
   }
-  
-  div {
-    width: 50%;
-    margin: 0 auto;
-    @media (max-width: 500px) { 
-      width: 100%;
-    }
 
     a {
       font-style: normal;
       text-decoration: none;
-      color: black;
+      color: white;
     }
-  }
 `;
 
 const ContactDataRow = styled.span`
@@ -136,69 +115,98 @@ const ContactDataRow = styled.span`
 
 const Contact = () => {
 
-  const sline1 = useRef()
-  const sline2 = useRef()
+  gsap.registerPlugin(ScrollTrigger);
+  const contactStrong = useRef()
+  const mailMe = useRef()
   const data = useRef()
+
+  const s = gsap.utils.selector(contactStrong);
+  const m = gsap.utils.selector(mailMe);
+
+  const handleMouseEnter = () => {
+    gsap.to(m(".mail__me"), {
+      y: "-9vw",
+      ease: "Power4.out",
+      duration: .3
+    })
+  }
+  const handleMouseLeave = () => {
+    gsap.to(m(".mail__me"), {
+      y: 0,
+      ease: "Power4.out",
+      duration: 0.3,
+    });
+  };
+
 
   useEffect(() => {
 
-    const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#contact",
-          end: "center center",
-          start: "top bottom",
-          scrub: true,
-        }
-      });
-    gsap.to(sline1.current, {scrollTrigger: {
+    gsap.to(s(".row"), {scrollTrigger: {
       trigger: "#contact",
       end: "center center",
       start: "top bottom",
       scrub: true,
-    }, duration:"1.5", x:"-=3vw", alpha: "1", ease: "circ.easeOut"});
-    tl.to(sline2.current, { duration: "1.5" , x :"+=3vw", alpha: "1", ease: "circ.easeOut", delay : "0.7"})
-    tl.to(data.current, { scrollTrigger: {
+    }, duration: "5", x: "0", alpha: "1", ease: "circ.easeOut"
+    });
+
+    gsap.to(data.current, {
+      scrollTrigger: {
           trigger: "#contact",
-          start: "center-=50 center",
-          end: "bottom bottom",
-          y:30,
-          scrub: true,
+          start: "center center",
+          end: "bottom bottom"
         },
-        duration: "2" , alpha: "1", ease: "circ.easeOut", delay : "0.7"})
-  }, []);
+      duration: "1",
+      alpha: 1,
+      y: -30,
+      ease: "circ.easeOut"
+    })
+  }, [s]);
   
     return (
-        <ContactStyled id="contact">
-            <ContactContainerStyled>
-                <ContactStrongStyled>
-                    <StrongRow ref={sline1}>Do you want to talk?</StrongRow>
-                    <StrongRow ref={sline2}><div/>Get in <a href="mailto:tkmatuszewski@gmail.com">touch</a></StrongRow>
-                </ContactStrongStyled>
-                <ContactDataContaier ref={data}>
-                  <ContactDataColumn>
-                      <div>
-                        <ContactDataRow>Tomasz Matuszewski</ContactDataRow>
-                        <ContactDataRow>Frontend Developer</ContactDataRow>
-                      </div>
-                    </ContactDataColumn>
-                    <ContactDataColumn>
-                      <div>
-                        <address>
-                            <ContactDataRow>tkmatuszewski@gmail.com</ContactDataRow>
-                            <ContactDataRow>Warsaw, Poland</ContactDataRow>
-                        </address>
-                    </div>
-                    </ContactDataColumn>
-                    <ContactDataColumn>
-                      <div>
-                        <ContactDataRow><a href="https://linkedin.com/in/matuszewski-tomasz" target="blank">Linkedin</a></ContactDataRow>
-                        <ContactDataRow><a href="https://github.com/tkmatuszewski" target="blank">Github</a></ContactDataRow>
-                      </div>
-                    </ContactDataColumn>
-                </ContactDataContaier>
-            </ContactContainerStyled>
-        </ContactStyled>
-    )
+      <ContactStyled id="contact">
+        <div className="container">
+          <ContactStrongStyled ref={contactStrong}>
+            <span className="row">Do you want to talk?</span>
+            <span className="row">
+              <div />
+              <button ref={mailMe} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                <span className="mail__me">Get in touch</span>
+                <span className="mail__me">
+                  <a href="mailto:tkmatuszewski@gmail.com">Write me!</a>
+                </span>
+              </button>
+            </span>
+          </ContactStrongStyled>
+          <ContactDataContaier ref={data}>
+            <ContactDataColumn>
+              <ContactDataRow>Tomasz Matuszewski</ContactDataRow>
+              <ContactDataRow>Frontend Developer</ContactDataRow>
+            </ContactDataColumn>
+            <ContactDataColumn>
+              <address>
+                <ContactDataRow>tkmatuszewski@gmail.com</ContactDataRow>
+                <ContactDataRow>Warsaw, Poland</ContactDataRow>
+              </address>
+            </ContactDataColumn>
+            <ContactDataColumn>
+              <ContactDataRow>
+                <a
+                  href="https://linkedin.com/in/matuszewski-tomasz"
+                  target="blank"
+                >
+                  Linkedin
+                </a>
+              </ContactDataRow>
+              <ContactDataRow>
+                <a href="https://github.com/tkmatuszewski" target="blank">
+                  Github
+                </a>
+              </ContactDataRow>
+            </ContactDataColumn>
+          </ContactDataContaier>
+        </div>
+      </ContactStyled>
+    );
 }
 
 export default Contact;
