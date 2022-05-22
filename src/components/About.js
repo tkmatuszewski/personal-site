@@ -1,153 +1,143 @@
 import styled from "styled-components";
 import React, {useRef, useEffect} from "react";
-import  gsap from "gsap";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const AboutStyled = styled.section`
-min-height: 100vh;
-display: flex;
-justify-content: center;
-background: black;
-`
+  min-height: 120vh;
+  display: flex;
+  justify-content: center;
+  background: black;
+  margin: 0 15%;
+
+  .aboutContentCnt {
+    width: 30vw;
+    margin-left: 60%;
+    @media (max-width: 1050px) {
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+`;
 
 const AboutCnt = styled.div`
-width: 50%;
-display: grid;
-grid-template-columns: 50% 50%;
-grid-template-rows: repeat(4, 40vh );
-grid-row-gap: 5vh;
+width: 85%;
 color: white;
-transform: translateX(5vw);
-margin-top: 5vh;
-@media (max-width: 1000px) {
-  width: 80%;
-  grid-template-columns: 1fr;
-  grid-template-rows: 35vh repeat(3, 25vh);
-}
+display: flex ;
+flex-direction: column ;
+justify-content: space-evenly ;
 `
 const AboutStrongCnt = styled.div`
-grid-column: 1/3;
-grid-row: 1/2;
-margin-top: 15vh;
-margin-bottom: 15vh;
 opacity: 0;
-
 `
 const StrongRow = styled.strong`
   display: block;
   width: 100%;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 600;
-  font-size: 10vh;
-  @media (max-width: 1000px) {
-    font-size: 5vh;
-      }
-`
+  font-size: clamp(4vmin, 7vmin, 7vmin);
+`;
 const AboutContent = styled.p`
-  grid-column: 2/3;
-  align-self: center;
-  max-width: 100%;
-  font-family: 'Merriweather', serif;
+  margin-bottom: 2rem;
+  font-family: "Merriweather", serif;
+  font-weight: light;
   font-size: 2.5vh;
   text-align: justify;
-  letter-spacing: 0.15em;
   opacity: 0;
-  transform: translateX(-10vw);
-  @media (max-width: 1000px) {
-    max-width: 100%;
-    grid-column: 1/3;
-    align-self: center;
-      }
+  transform: translateX(-30px);
+  &:first-of-type {
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+    font-size: 2rem ;
+    color: orange;
+    /* text-transform: uppercase ; */
 
-&:nth-of-type(1) {
+  }
 
-  align-self: flex-end;
+  .col {
+    margin-bottom: 2rem;
+  }
   @media (max-width: 1000px) {
     max-width: 100%;
   }
-}
-
-&:nth-of-type(2) {
-  grid-row: 3/4;
-  grid-column: 1/2;
-  transform: translateX(+7vw);
-}
-
-&:nth-of-type(3) {
-  grid-row: 4/5;
-  align-self: flex-start;
-}
-`
+`;
 
 const About = () => {
 
-    const AboutHeader = useRef()
-    const AboutColumn1 = useRef()
-    const AboutColumn2 = useRef()
-    const AboutColumn3 = useRef()
+  const AboutHeader = useRef()
+  const AboutMain = useRef()
+  const cn = useRef();
+  
+  const q = gsap.utils.selector(cn);
 
-      useEffect(() => {
+  useEffect(() => {
 
-        gsap.to(AboutHeader.current,{scrollTrigger: {
-          trigger: ".aboutHeader",
-          start: "center bottom",
-          end: "center center",
-          scrub: true,
-        }, x : "-=5vw", duration: "1",
-        alpha: "1",
-        ease: "circ.easeOut"});
-        gsap.to(AboutColumn1.current, { scrollTrigger: {
-            trigger: "#col1",
-            start: "center bottom",
-            end: "center center",
-            scrub: true,
-          }, duration: "1",
-          x: "+=10vw",
-          alpha: "1",
-          ease: "circ.easeOut"});
-        gsap.to(AboutColumn2.current, {  scrollTrigger: {
-            trigger: "#col2",
-            start: "center bottom",
-            end: "center center",
-            scrub: true,
-          }, duration: "1",
-          x: "-=7vw",
-          alpha: "1",
-          ease: "circ.easeOut"});
-        gsap.to(AboutColumn3.current, { scrollTrigger: {
-            trigger: "#col3",
-            start: "center bottom",
-            end: "center center",
-            scrub: true,
-          }, duration: "1",
-          x: "+=8vw",
-          alpha: "1",
-          ease: "circ.easeOut"});
-     }, []);
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to(AboutMain.current, {
+      scrollTrigger: {
+        trigger: ".about",
+        start: "top-400 bottom",
+        end: "center bottom",
+        scrub: 1,
+      },
+      margin: 0
+    });
+        
+    gsap.to(q(".col"), {
+      scrollTrigger: "#about",
+      duration: "2",
+      x: 0,
+      alpha: "1",
+      ease: "Power3.easeOut",
+      stagger: 0.2,
+    });
+
+
+    gsap.to(AboutHeader.current, {
+      scrollTrigger: {
+        trigger: ".about",
+        start: "top center",
+        end: "center center",
+      },
+      y: 30,
+      fontSize: "10vh",
+      duration: "1",
+      alpha: "1",
+      ease: "circ.easeOut",
+    });
+  });
 
     return (
-        <div id="about">
-            <AboutStyled>
-                <AboutCnt>
-                    <AboutStrongCnt ref={AboutHeader} className ="aboutHeader">
-                        <StrongRow>I'm Tomasz,</StrongRow>
-                        <StrongRow>a creative developer</StrongRow>
-                        <StrongRow>based in Warsaw.</StrongRow>
-                    </AboutStrongCnt>
-                    <AboutContent ref={AboutColumn1} id="col1">
-                    I design and write websites and apps with special care for aesthetics.  
-                    It is my ambition to create some meaningful and eye pleasing digital products.  
-                    </AboutContent>
-                    <AboutContent ref={AboutColumn2} id="col2">
-                    Since I started my web development journey a while ago I continue to improve patterns,
-                    technologies and techniques to make my work even more engaging and useful.
-                    </AboutContent>
-                    <AboutContent ref={AboutColumn3} id="col3">
-                        I am currently available for hire so write me and lets make a team.
-                    </AboutContent>
-                </AboutCnt>
-            </AboutStyled>
-        </div>
-    )
+      <div id="about">
+        <AboutStyled ref={AboutMain} className="about">
+          <AboutCnt>
+            <AboutStrongCnt ref={AboutHeader} className="aboutHeader">
+              <StrongRow>I'm Tomasz, aspiring frontend</StrongRow>
+              <StrongRow> dev based in Warsaw.</StrongRow>
+            </AboutStrongCnt>
+            <div className="aboutContentCnt" ref={cn}>
+              <AboutContent className="col">
+                I am the Batman.
+               </AboutContent>
+              <AboutContent className="col">
+              I really am. When the night comes and my daughter goes to sleep I start another life. As soon as my computer turns on I loose myself to the web development.
+              </AboutContent>
+              <AboutContent className="col">
+                I design and write websites and apps with special care for
+                aesthetics. It is my ambition to create some meaningful and eye
+                pleasing digital products.
+              </AboutContent>
+              <AboutContent className="col">
+                The is no time limit I can't spend on visual and functional improvement of my projects to make my work as engaging as possible.
+              </AboutContent>
+              <AboutContent className="col">
+                Look... I think we agree the is world would be a better place with a batman on a full time job... so if you're looking for a developer don't hesitate to reach me!
+              </AboutContent>
+            </div>
+          </AboutCnt>
+        </AboutStyled>
+      </div>
+    );
 }
 
 export default About
