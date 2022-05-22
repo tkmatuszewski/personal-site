@@ -5,7 +5,7 @@ import React from "react";
 const MenuPageStyled = styled.div`
     width: 100%;
     height: 100vh;
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(0,0,0,0.96);
     position: fixed;
     top: 0;
     left: 0;
@@ -48,7 +48,7 @@ const MenuCloseStyled = styled.button`
 `;
 
 const MenuPageCntStyled = styled.div`
-  width: 94%;
+  width: 95vw;
   height: 93%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -116,7 +116,7 @@ const Menu =({showMenu, setShowMenu})=> {
                 <MenuCntStyled>
                     <MenuMainStyled>
                         <a className="menuItem" href="#home" onClick={()=>handleClick()}>Home</a>
-                        <a className="menuItem" href="#about" onClick={()=>handleClick()} >About</a>
+                        <a className="menuItem" href="#about" onClick={()=>handleClick()}>About</a>
                         <a className="menuItem" href="#work" onClick={()=>handleClick()}>Work</a>
                         <a className="menuItem" href="#contact" onClick={()=>handleClick()}>Contact</a>
                     </MenuMainStyled>
