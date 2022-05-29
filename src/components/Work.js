@@ -4,51 +4,51 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 
 const WorkStyled = styled.section`
+  font-family: "Raleway", sans-serif;
+  min-height: 100vh;
 
-min-height: 100vh;
+  ul {
+    justify-self: flex-end;
+    list-style-type: none;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2rem;
 
-    ul {
-        justify-self: flex-end;
-        list-style-type: none;
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 2rem;
+    a {
+      text-decoration: none;
+      color: inherit;
+      width: 100%;
+    }
+  }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-            width: 100%;
-        }
+  li {
+    width: 100%;
+    color: black;
+    font-family: "Raleway", sans-serif;
+    font-size: 2vh;
+    transition: 0.4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+    padding: 1rem 0;
+
+    &:nth-of-type(2) {
+      border: 1px solid lightgray;
     }
 
-    li {
-        width: 100%;
-        color: black;
-        font-family: 'Raleway', sans-serif;
-        font-size: 2vh;
-        transition: 0.4s;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-bottom: 1px solid lightgray;
-        padding: 1rem 0;
-
-        &:nth-of-type(2) {
-            border: 1px solid lightgray;
-        }
-
-        span {
-            color: gray;
-            display: block;
-            width: 15%;
-            @media (max-width: 435px) {
-              width: auto;
-              padding: 0.5rem;
-        }
+    span {
+      color: gray;
+      display: block;
+      width: 15%;
+      @media (max-width: 435px) {
+        width: auto;
+        padding: 0.5rem;
       }
     }
-    `;
+  }
+`;
 
     const WorkCnt = styled.div`
       width: 80%;
@@ -63,6 +63,10 @@ min-height: 100vh;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      span {
+        font-family: "Merriweather", serif;
+      }
+
       @media (max-width: 435px) {
         flex-direction: column ;
         align-items: flex-start ;
@@ -71,15 +75,10 @@ min-height: 100vh;
         }
       }
     `;
-    
-const ProjectTitle = styled.strong`
-  font-family: "Raleway, sans-serif"; 
-`
 
 const WorkSign = styled.div`
   margin-top: 15vh;
   height: 20vmin;
-  font-family: "Raleway", sans-serif;
   font-weight: 700;
   opacity: 0.6;
   overflow: hidden;
@@ -111,7 +110,7 @@ const Work = () => {
             y: 0,
             ease: 'Power4.out'
         });  
-    })
+    },[])
 
     return (
       <WorkStyled id="work">
@@ -125,7 +124,7 @@ const Work = () => {
             <a href="">
               <li>
                 <Container>
-                  <ProjectTitle>Babylab database</ProjectTitle>
+                  <strong>Babylab database</strong>
                   <span>Desktop app</span>
                 </Container>
               </li>
@@ -133,7 +132,7 @@ const Work = () => {
             <a href="">
               <li>
                 <Container>
-                  <ProjectTitle>Slide.</ProjectTitle>
+                  <strong>Slide.</strong>
                   <span>Website</span>
                 </Container>
               </li>
@@ -141,7 +140,7 @@ const Work = () => {
             <a href="">
               <li>
                 <Container>
-                  <ProjectTitle>Movie Database</ProjectTitle>
+                  <strong>Movie Database</strong>
                   <span>Responsive app</span>
                 </Container>
               </li>
