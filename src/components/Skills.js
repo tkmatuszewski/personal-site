@@ -24,6 +24,7 @@ const SkillsStyled = styled.section`
 const SkillsList = styled.ul`
   list-style-type: none;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   padding: 5vh;
   margin-top: 10vh;
@@ -85,7 +86,7 @@ const Skills = () => {
         ease: "power4.out",
         stagger: 0.1
     });
-  });
+  },[]);
   
     return (
       <SkillsStyled>
