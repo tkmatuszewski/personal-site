@@ -160,7 +160,7 @@ const Contact = () => {
       y: -30,
       ease: "circ.easeOut"
     })
-  }, [s]);
+  }, []);
   
     return (
       <ContactStyled id="contact">

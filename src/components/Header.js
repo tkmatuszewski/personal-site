@@ -50,7 +50,7 @@ const Header =({children})=> {
         },
         color: "black"
       });
-  })
+  },[])
     return (
       <HeaderStyled ref={header}>
         {children}

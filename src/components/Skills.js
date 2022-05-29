@@ -14,12 +14,11 @@ import webpack from "../images/webpack.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-
 const SkillsStyled = styled.section`
     width: 90%;
     min-height: 70vh;
     margin: 0 auto;
-`
+`;
 
 const SkillsList = styled.ul`
   list-style-type: none;
@@ -32,6 +31,7 @@ const SkillsList = styled.ul`
     padding: 0 ;
   }
 `;
+
 const SkillStyled = styled.li`
   display: flex;
   flex-direction: column;
