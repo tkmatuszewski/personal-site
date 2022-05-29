@@ -14,7 +14,7 @@ const AboutStyled = styled.section`
     width: 30vw;
     margin-left: 60%;
     @media (max-width: 1050px) {
-      width: 90%;
+      width: 100%;
       margin: 0 auto;
     }
   }
@@ -37,6 +37,7 @@ const StrongRow = styled.strong`
   font-weight: 600;
   font-size: clamp(4vmin, 7vmin, 7vmin);
 `;
+
 const AboutContent = styled.p`
   margin-bottom: 2rem;
   font-family: "Merriweather", serif;
@@ -45,13 +46,12 @@ const AboutContent = styled.p`
   text-align: justify;
   opacity: 0;
   transform: translateX(-30px);
+
   &:first-of-type {
     font-family: "Raleway", sans-serif;
     font-weight: bold;
-    font-size: 2rem ;
+    font-size: 1.5rem ;
     color: orange;
-    /* text-transform: uppercase ; */
-
   }
 
   .col {
@@ -75,21 +75,23 @@ const About = () => {
     gsap.registerPlugin(ScrollTrigger);
     gsap.to(AboutMain.current, {
       scrollTrigger: {
-        trigger: ".about",
-        start: "top-400 bottom",
-        end: "center bottom",
-        scrub: 1,
+        trigger: ".aboutHeader",
+        start: "top bottom"
       },
-      margin: 0
+      margin: 0,
+      ease: "Power3.easeOut",
+      duration : 1
     });
         
     gsap.to(q(".col"), {
-      scrollTrigger: "#about",
-      duration: "2",
+      scrollTrigger: {
+        trigger: ".about",
+        start: "center bottom"
+      },
       x: 0,
       alpha: "1",
       ease: "Power3.easeOut",
-      stagger: 0.2,
+      stagger: 0.1,
     });
 
 
@@ -105,7 +107,7 @@ const About = () => {
       alpha: "1",
       ease: "circ.easeOut",
     });
-  });
+  },[]);
 
     return (
       <div id="about">
