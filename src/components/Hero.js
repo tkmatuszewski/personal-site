@@ -4,10 +4,10 @@ import { gsap } from "gsap/all";
 
 const HeroPageStyled = styled.section`
   background: white;
-  height: 130vh;
+  height: 95vh;
   width: 100%;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   margin: 0 auto;
   @media (max-width: 768px) {
@@ -18,7 +18,6 @@ const HeroPageStyled = styled.section`
 const HeroTextStyled = styled.ul`
   width: 85%;
   list-style-type: none;
-  margin-bottom: 35vh;
 
   .line {
     width: 100%;
@@ -101,10 +100,10 @@ const HeroPage = () => {
          y: 500,
          ease: "power4.out",
          delay: 0.5,
-         stagger: 0.2,
+         stagger: 0.1,
          duration: 1
        });
-     }, [q]);
+     }, []);
 
   return (
     <HeroPageStyled id="home" ref={hero}>
