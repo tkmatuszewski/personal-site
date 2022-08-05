@@ -137,10 +137,10 @@ const Work = () => {
                 </Container>
               </li>
             </a>
-            <a href="">
+            <a href="https://movierush.netlify.app/">
               <li>
                 <Container>
-                  <strong>Movie Database</strong>
+                  <strong>Movierush</strong>
                   <span>Responsive app</span>
                 </Container>
               </li>
